@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import './index.css';
 import ItemPage from './Components/ItemPage.jsx';
-import store from './Store/store.js';
+import store from './Store/Store.js';
 import { Provider } from 'react-redux'
 
 
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element:<Blog/>
       },
       {
-        path:'/item',
+        path:'/itemPage',
         element:<ItemPage/>
       },
     ]
