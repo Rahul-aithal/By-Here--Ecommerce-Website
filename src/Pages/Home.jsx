@@ -1,21 +1,34 @@
+import ItemCard from '../Components/ItemCard';
 import React from 'react'
 import useFetch from '../Hooks/useFetchData'
-import ItemCard from '../Components/ItemCard';
+import { useDispatch, useSelector } from 'react-redux';
+import {setCategoryToogle} from '../Store/categorySlice'
 
 function Home() {
 
-  const { data, loading, error } = useFetch('https://dummyjson.com/products?limit=4&sortBy=rating&order=desc');
-  console.log(data);
+  // const { data, loading, error } = useFetch('https://dummyjson.com/products/categories');
+  // console.log(data);
+  const categorey=useSelector((state)=>(state.category.category));
+  console.log(categorey);
+const dispatch = useDispatch();
   return (
-    <div className='mx-2 h-[100vh]'>
+    <div className='mx-2 h-full md:grid-cols-1 gap-3' >
 
       <h1 className='font-bold text-xl'>Bestseller</h1>
-      <div className='grid grid-cols-4 gap-2 place-items-center'>
-      {loading&&<ItemCard loading={loading}/>}
-      {error&&<ItemCard error={error} />}
-      {data?.products&&data?.products.map((item)=>(
-        <ItemCard data={item} />
-      )) }
+      <div className='grid md:grid-cols-4 grid-cols-1  gap-2 place-items-center'>
+
+        <ItemCard url={'https://dummyjson.com/products?limit=4&sortBy=rating&order=desc'} />
+      
+      </div>
+
+      <h1 className='font-semibold '>Catgorey:
+         <span className='font-bold mx-2 cursor-pointer' onClick={()=>{
+          dispatch(setCategoryToogle({categoryToogle:true}))}}>
+      {categorey.name}
+        </span> </h1>
+      <div className='grid md:grid-cols-4 grid-cols-1 gap-2 place-items-center'>
+        <ItemCard url={`https://dummyjson.com/products/category/${categorey.slug}?limit=4&sortBy=rating&order=desc`} />
+      
       </div>
     </div>
   )

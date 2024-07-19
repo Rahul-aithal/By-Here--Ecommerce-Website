@@ -1,10 +1,14 @@
+import { map } from 'lodash'
 import React from 'react'
 
 function ItemList({data}) {
   return (
+   data.map((item)=>{
     <div>
-      Item Lists
-    </div>
+    <img src={item.thumbnail} alt={item.title} />
+  </div>
+   })
+  
   )
 }
 

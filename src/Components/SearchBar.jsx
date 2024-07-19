@@ -16,7 +16,7 @@ import { FaSearch } from 'react-icons/fa';
 import useFetch from '../Hooks/useFetchData';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setItem } from '../Store/itemSlice';
+import { setItem } from '../Store/ItemSlice';
 
 
 function SearchBar({ ref }) {
@@ -31,10 +31,10 @@ function SearchBar({ ref }) {
     <>
 
       <button
-        className="flex items-center justify-start bg-gray-100 px-4 py-2 rounded-full w-64 border border-gray-300 hover:bg-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out"
+        className="flex items-center justify-start bg-gray-100 px-4 py-2 rounded-full md:w-64 w-32 border border-gray-300 hover:bg-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out"
         onClick={onOpen}
       >
-        <FaSearch className="mr-2" />
+        <FaSearch className="md:mr-2" />
         <span>Search</span>
       </button>
 
@@ -71,9 +71,9 @@ function SearchBar({ ref }) {
             {data.products && data.products.map((res,idx) => {
               return (
                 <div key={res.id}
-                  className="w-full h-8 px-3 text-black font-medium cursor-pointer rounded-xl bg-white  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out"
+                  className="w-full h-8 px-3 text-black font-medium cursor-pointer rounded-xl bg-white  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out border-red-300"
 onClick={()=>{
-  navigateTo('/item');
+  navigateTo('/itemPage');
   dispatch(setItem({data:data.products[idx]}));
   onClose()
 }}
