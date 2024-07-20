@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
-import { Home, About, Support, Cart,Blog } from './Pages';
+import { Home, About, Support, Cart,Blog, AllItmes } from './Pages';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import './index.css';
@@ -39,6 +39,10 @@ const router = createBrowserRouter([
       {
         path:'/itemPage',
         element:<ItemPage/>
+      },
+      {
+        path:'/ALLItemPage',
+        element:<AllItmes/>
       },
     ]
   },
