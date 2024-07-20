@@ -41,7 +41,7 @@ function Navbar() {
       <Drawer colorScheme="gray" placement="left" onClose={onClose} isOpen={isOpen || categoryToogle}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
+          <DrawerCloseButton onClick={()=>{dispatch(setCategoryToogle({ categoryToggle: false }));}}/>
           <DrawerHeader borderBottomWidth="1px">Categories</DrawerHeader>
           <DrawerBody>
             {data.length > 0 ? (
