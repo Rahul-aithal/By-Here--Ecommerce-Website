@@ -1,51 +1,30 @@
+// src/index.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import { Home, About, Support, Cart,Blog, AllItmes } from './Pages';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
-import './index.css';
-import ItemPage from './Components/ItemPage.jsx';
+import { Provider } from 'react-redux';
 import store from './Store/Store.js';
-import { Provider } from 'react-redux'
-
+import './index.css';
+import App from './App'; 
+import { About, Blog, BlogDetail, Cart, Home, ItemPage, Support, AllItmes } from './Pages/index.js';
 
 // Define the routes
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (<App />),
+    element: <App />, // Wrap all routes with App
     children: [
-      {
-        path:'/',
-        element:<Home/>
-      },
-      {
-        path:'/about',
-        element:<About/>
-      },
-      {
-        path:'/cart',
-        element:<Cart/>
-      },
-      {
-        path:'/support',
-        element:<Support/>
-      },
-      {
-        path:'/blogs',
-        element:<Blog/>
-      },
-      {
-        path:'/item-page',
-        element:<ItemPage/>
-      },
-      {
-        path:'/all-items-page',
-        element:<AllItmes/>
-      },
+      { path: "/", element: <Home /> },
+      { path: "/about", element: <About /> },
+      { path: "/cart", element: <Cart /> },
+      { path: "/support", element: <Support /> },
+      { path: "/blogs", element: <Blog /> },
+      { path: "/blogs/:id", element: <BlogDetail /> },
+      { path: "/item-page", element: <ItemPage /> },
+      { path: "/all-items-page", element: <AllItmes /> }
     ]
-  },
+  }
 ]);
 
 // Create the root once
@@ -56,8 +35,8 @@ root.render(
   <React.StrictMode>
     <ChakraProvider>
       <Provider store={store}>
-    <RouterProvider router={router}  />
-    </Provider>
+        <RouterProvider router={router} />
+      </Provider>
     </ChakraProvider>
   </React.StrictMode>
 );
