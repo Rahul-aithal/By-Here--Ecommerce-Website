@@ -37,11 +37,11 @@ const router = createBrowserRouter([
         element:<Blog/>
       },
       {
-        path:'/itemPage',
+        path:'/item-page',
         element:<ItemPage/>
       },
       {
-        path:'/ALLItemPage',
+        path:'/all-items-page',
         element:<AllItmes/>
       },
     ]
