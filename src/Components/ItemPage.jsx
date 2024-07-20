@@ -19,7 +19,6 @@ import {
   useBreakpointValue,
   IconButton
 } from '@chakra-ui/react';
-import { MdExpandMore, MdExpandLess } from 'react-icons/md'; // Optional: For more/less toggle
 import { useNavigate } from 'react-router-dom';
 
 function ItemPage() {

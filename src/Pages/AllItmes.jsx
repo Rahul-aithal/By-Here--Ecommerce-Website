@@ -33,15 +33,15 @@ function AllItmes() {
       `https://dummyjson.com/products/category/${category?.slug}?limit=${limit}&sortBy=rating&skip=${skip}&order=desc`;
   }, [bestSeller, category, limit, skip]);
 
-  const { data, loading, error } = useFetch(url()); // Assuming useFetch needs a URL
+  const { data, loading, error } = useFetch(url()); 
  
 
   useEffect(() => {
     if (data) {
-      setTotal(data.total); // Assuming the total is in the first 
+      setTotal(data.total); 
     }
     if (data && data.products && data.products.length > 0) {
-      setItems(data.products); // Assuming the total is in the first product
+      setItems(data.products); 
     }
 
   }, [data]);
@@ -137,7 +137,6 @@ function AllItmes() {
                   isDisabled={item.stock === 0}
                   onClick={(e) => {
                     e.stopPropagation()
-                    console.log("added");
                     navigate('/cart', { state: { item: item, add: true } })}}
                 >
                   {item.stock > 0 ? 'Add to Cart' : 'Out of Stock'}

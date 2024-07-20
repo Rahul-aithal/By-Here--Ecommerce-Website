@@ -7,9 +7,6 @@ function BlogDetail() {
   const { id } = useParams();
   const post = blogPosts.find((post) => post.id === parseInt(id, 10));
 
-  console.log('Post ID:', id); // Debugging
-  console.log('Found Post:', post); // Debugging
-
   if (!post) {
     return <Text>Post not found</Text>;
   }
