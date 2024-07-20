@@ -17,7 +17,7 @@ function Navbar() {
   if (error) return <p>Error fetching categories</p>;
 
   return (
-    <nav className="bg-slate-50 grid grid-cols-3 place-items-center h-full w-full md:min-h-14 md:max-h-16 max-h-12 sticky top-0 z-20 px-3">
+    <nav className="bg-transparent grid grid-cols-3 place-items-center h-full w-full md:min-h-14 md:max-h-16 max-h-12 sticky top-0 z-20 px-3 backdrop-blur-xl">
       <div className="flex gap-4 w-full col-start-1 items-center justify-start">
         <Button colorScheme="blackAlpha" onClick={onOpen} aria-label="Open menu">
           <GiHamburgerMenu />
@@ -31,8 +31,8 @@ function Navbar() {
         <NavLink to="/cart" className={({ isActive }) => `${isActive ? "text-black" : "text-gray-400"} cursor-pointer hover:text-black font-bold`}>
           Cart
         </NavLink>
-        <NavLink to="/about" className={({ isActive }) => `${isActive ? "text-black" : "text-gray-400"} cursor-pointer hover:text-black font-bold`}>
-          About
+        <NavLink to="/all-items-page" className={({ isActive }) => `${isActive ? "text-black" : "text-gray-400"} cursor-pointer hover:text-black font-bold`}>
+          Store
         </NavLink>
         <NavLink to="/support" className={({ isActive }) => `${isActive ? "text-black" : "text-gray-400"} cursor-pointer hover:text-black font-bold`}>
           Support
@@ -50,7 +50,7 @@ function Navbar() {
                   key={category.name}
                   className="p-2 mb-1 w-full md:text-xl bg-white border-2 rounded hover:bg-gray-100 cursor-pointer"
                   onClick={() => {
-                    dispatch(setCategory(category));
+                    dispatch(setCategory({category}));
                     dispatch(setCategoryToogle({ categoryToggle: false }));
                     onClose();
                   }}
