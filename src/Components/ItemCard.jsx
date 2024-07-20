@@ -11,7 +11,7 @@ const { data, loading, error } = useFetch(url);
 
 const handleClick=function (data) {
     dispatch(setItem({data}));
-    navigateTo("/itemPage");
+    navigateTo("/item-page");
 
 }
 
