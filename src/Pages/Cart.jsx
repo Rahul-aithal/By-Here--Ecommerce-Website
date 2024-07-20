@@ -22,128 +22,225 @@ import {
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
   const location = useLocation();
-  const item = location.state.item || {};
-  const add = location.state.add || false;
+  const item = location.state?.item || {};
+  const add = location.state?.add || false;
+  const [purchasedProducts, setPurchasedProducts] = useState([]);
+
+  // Initialize cart products from session storage
+  useEffect(() => {
+    try {
+      const storedCart = sessionStorage.getItem('cartProducts');
+      if (storedCart) {
+        setCartProducts(JSON.parse(storedCart));
+      }
+    } catch (error) {
+      console.error('Failed to parse cartProducts from sessionStorage:', error);
+    }
+  }, []);
 
   useEffect(() => {
-    setCartProducts((prevCartProducts) => {
-      const existingProductIndex = prevCartProducts.findIndex((prod) => prod.id === item.id);
-
-      if (existingProductIndex !== -1) {
-        const updatedCartProducts = [...prevCartProducts];
-        updatedCartProducts[existingProductIndex] = {
-          ...updatedCartProducts[existingProductIndex],
-          quantity: updatedCartProducts[existingProductIndex].quantity + 1,
-        };
-        return updatedCartProducts;
-      } else {
-        return [
-          ...prevCartProducts,
-          { ...item, quantity: item.minimumOrderQuantity },
-        ];
+    try {
+      const storedPurchased = sessionStorage.getItem('purchasedProducts');
+      if (storedPurchased) {
+        setCartProducts(JSON.parse(storedPurchased));
       }
-    });
-  }, [item]);
+    } catch (error) {
+      console.error('Failed to parse cartProducts from sessionStorage:', error);
+    }
+  }, []);
+
+  // Update session storage whenever cartProducts changes
+  useEffect(() => {
+    if (cartProducts.length > 0) {
+      sessionStorage.setItem(
+        'cartProducts',
+        JSON.stringify(cartProducts.map((cartItem) => ({
+          ...cartItem, // Copy all properties of the cart item
+        })))
+      );
+    }
+  }, [cartProducts]);
+
+  useEffect(() => {
+    if (purchasedProducts.length > 0) {
+      sessionStorage.setItem(
+        'purchasedProducts',
+        JSON.stringify(purchasedProducts.map((purchasedItem) => ({
+          ...purchasedItem, // Copy all properties of the purchased item
+        })))
+      );
+    }
+  }, [purchasedProducts]);
+  
+
+  // Handle adding item to cart
+  useEffect(() => {
+    if (add && item.id) {
+      setCartProducts((prevCartProducts) => {
+        const existingProductIndex = prevCartProducts.findIndex(
+          (prod) => prod.id === item.id
+        );
+
+        if (existingProductIndex !== -1) {
+          const updatedCartProducts = [...prevCartProducts];
+          updatedCartProducts[existingProductIndex] = {
+            ...updatedCartProducts[existingProductIndex],
+            quantity: updatedCartProducts[existingProductIndex].quantity + 1,
+          };
+          return updatedCartProducts;
+        } else {
+          return [
+            ...prevCartProducts,
+            { ...item, quantity: item.minimumOrderQuantity },
+          ];
+        }
+      });
+    }
+  }, [add, item]);
 
   const handleRemoveFromCart = (id) => {
-    setCartProducts((prevCartItems) => prevCartItems.filter((cartItem) => cartItem.id !== id));
+    setCartProducts((prevCartItems) =>
+      prevCartItems.filter((cartItem) => cartItem.id !== id)
+    );
+  };
+  const handleBuyNow = (purchasedCartItem) => {
+    
+      setPurchasedProducts([...purchasedProducts,purchasedCartItem])
+      setCartProducts((prevCartItems) =>
+        prevCartItems.filter((cartItem) => cartItem.id !== purchasedCartItem.id)
+      );
   };
 
-  return (
-    cartProducts.length > 0 ? (
-      cartProducts.map((item) => (
-        <VStack
-          key={item.id}
-          divider={<StackDivider borderColor="gray.200" />}
-          spacing={6}
-          align="stretch"
-          p={4}
-          bg="gray.50"
+  const handleQuantityChange = (id, newQuantity) => {
+    setCartProducts((prevCartProducts) =>
+      prevCartProducts.map((cartItem) =>
+        cartItem.id === id
+          ? { ...cartItem, quantity: newQuantity }
+          : cartItem
+      )
+    );
+  };
+
+  return cartProducts.length > 0 ? (
+    cartProducts.map((cartItem) => (
+      <VStack
+        key={cartItem.id}
+        divider={<StackDivider borderColor="gray.200" />}
+        spacing={6}
+        align="stretch"
+        p={4}
+        bg="gray.50"
+        rounded="lg"
+        shadow="md"
+      >
+        <Card
+          direction={{ base: 'column', sm: 'row' }}
+          overflow="hidden"
+          variant="outline"
+          bg="white"
+          shadow="sm"
           rounded="lg"
-          shadow="md"
+          transition="transform 0.3s, box-shadow 0.3s"
+          _hover={{
+            transform: 'scale(1.02)',
+            shadow: 'lg',
+          }}
         >
-          <Card
-            direction={{ base: 'column', sm: 'row' }}
-            overflow="hidden"
-            variant="outline"
-            bg="white"
-            shadow="sm"
-            rounded="lg"
-            transition="transform 0.3s, box-shadow 0.3s"
-            _hover={{
-              transform: 'scale(1.02)',
-              shadow: 'lg',
-            }}
-          >
-            <Image
-              objectFit="cover"
-              maxW={{ base: '100%', sm: '300px' }}
-              w="full"
-              h="auto"
-              src={item.thumbnail}
-              alt={item.title}
-            />
+          <Image
+            objectFit="cover"
+            maxW={{ base: '100%', sm: '300px' }}
+            w="full"
+            h="auto"
+            src={cartItem.thumbnail}
+            alt={cartItem.title}
+          />
 
-            <Stack flex="1" p={4}>
-              <CardBody>
-                <Heading size="md" mb={2} color="blue.600">
-                  {item.title}
-                </Heading>
+          <Stack flex="1" p={4}>
+            <CardBody>
+              <Heading size="md" mb={2} color="blue.600">
+                {cartItem.title}
+              </Heading>
 
-                <Text py={2} fontSize="sm" color="gray.700">
-                  {item.description || 'Description not available'}
+              <Text py={2} fontSize="sm" color="gray.700">
+                {cartItem.description || 'Description not available'}
+              </Text>
+
+              <Box mt={4}>
+                <Text fontWeight="bold" color="blue.500">
+                  Price: ${cartItem.price?.toFixed(2) || 'N/A'}
                 </Text>
-
-                <Box mt={4}>
-                  <Text fontWeight="bold" color="blue.500">
-                    Price: ${item.price?.toFixed(2) || 'N/A'}
-                  </Text>
-                  <Text fontWeight="bold" color={item.rating > 3.8 ? "green.500" : item.rating > 2.5 ? "yellow.500" : "red.500"}>
-                    Rating: {item.rating?.toFixed(1) || 'No rating'}
-                  </Text>
-                  <Text fontWeight="bold" color={item.stock > 0 ? 'green.500' : 'red.500'}>
-                    Stock: {item.stock > 0 ? `${item.stock} available` : 'Out of stock'}
-                  </Text>
-                  <Text fontWeight="bold" color="teal.600">
-                    Shipment: {item.shippingInformation || 'Not available'}
-                  </Text>
-                  <NumberInput
-                    size="sm"
-                    maxW={20}
-                    defaultValue={item.quantity || item.minimumOrderQuantity}
-                    min={item.minimumOrderQuantity}
-                    max={item.stock > 0 ? Math.round(item.stock / 2) - item.minimumOrderQuantity * 2 : item.minimumOrderQuantity}
-                  >
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
-                </Box>
-              </CardBody>
-
-              <CardFooter>
-                <Button
-                  variant="solid"
-                  colorScheme="blue"
-                  size="sm"
-                  borderRadius="full"
-                  isDisabled={item.stock === 0}
-                  onClick={() => handleRemoveFromCart(item.id)}
+                <Text
+                  fontWeight="bold"
+                  color={
+                    cartItem.rating > 3.8
+                      ? 'green.500'
+                      : cartItem.rating > 2.5
+                      ? 'yellow.500'
+                      : 'red.500'
+                  }
                 >
-                  {item.stock > 0 ? 'Buy Now' : 'Out of Stock'}
-                </Button>
-              </CardFooter>
-            </Stack>
-          </Card>
-        </VStack>
-      ))
-    ) : (
-      <Text p={4} textAlign="center" color="gray.600">
-        Your cart is empty.
-      </Text>
-    )
+                  Rating: {cartItem.rating?.toFixed(1) || 'No rating'}
+                </Text>
+                <Text
+                  fontWeight="bold"
+                  color={cartItem.stock > 0 ? 'green.500' : 'red.500'}
+                >
+                  Stock: {cartItem.stock > 0 ? `${cartItem.stock} available` : 'Out of stock'}
+                </Text>
+                <Text fontWeight="bold" color="teal.600">
+                  Shipment: {cartItem.shippingInformation || 'Not available'}
+                </Text>
+                <NumberInput
+                  size="sm"
+                  maxW={20}
+                  value={cartItem.quantity}
+                  min={cartItem.minimumOrderQuantity}
+                  max={cartItem.stock > 0 ? cartItem.stock : cartItem.minimumOrderQuantity}
+                  onChange={(valueAsString, valueAsNumber) =>
+                    handleQuantityChange(cartItem.id, valueAsNumber)
+                  }
+                  isDisabled={cartItem.stock <= 0} // Disable if no stock
+                >
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </Box>
+            </CardBody>
+
+            <CardFooter>
+              <Button
+              m={2}
+                variant="solid"
+                colorScheme="green"
+                size="sm"
+                borderRadius="full"
+                isDisabled={cartItem.stock <= 0} // Disable if no stock
+                onClick={() => handleBuyNow(cartItem)}
+              >
+                {cartItem.stock > 0 ? 'Buy Now' : 'Out of Stock'}
+              </Button>
+              <Button
+              m={2}
+                variant="solid"
+                colorScheme="red"
+                size="sm"
+                borderRadius="full"
+                onClick={() => handleRemoveFromCart(cartItem.id)}
+              >
+                {cartItem.stock > 0 ? 'Remove from Cart' : 'Out of Stock'}
+              </Button>
+            </CardFooter>
+          </Stack>
+        </Card>
+      </VStack>
+    ))
+  ) : (
+    <Text p={4} textAlign="center" color="gray.600">
+      Your cart is empty.
+    </Text>
   );
 }
 
