@@ -7,7 +7,7 @@ const blogPosts = [
   
         The development process involved rigorous testing to ensure that every component met high-quality standards. The wireless technology used in these headphones provides a stable connection with minimal latency, making them ideal for both music and gaming. Furthermore, the battery life has been optimized to last longer, allowing users to enjoy their favorite tracks without interruption. With user-friendly controls and intuitive design, these headphones set a new benchmark for wireless audio devices. They are more than just headphones; they are a gateway to a world of high-definition sound.
       `,
-      image: "https://images.unsplash.com/photo-1506748686214-2c32d9eeb02d?fit=crop&w=800&h=400",
+      image: "https://www.boat-lifestyle.com/cdn/shop/articles/Blog-Posts-28-11_600x.jpg?v=1606480080"
     },
     {
       id: 2,
@@ -17,7 +17,7 @@ const blogPosts = [
   
         Each unit undergoes rigorous calibration to ensure that colors are displayed as accurately as possible, providing a true-to-life viewing experience. The monitor's ergonomic design allows for height and tilt adjustments, ensuring comfortable use over long periods. It also features multiple connectivity options, making it versatile and easy to integrate with various devices. With a focus on reducing eye strain, it incorporates blue light filtering and flicker-free technology. This 4K monitor is not just about visuals; it is about creating an immersive environment where work and entertainment meet.
       `,
-      image: "https://images.unsplash.com/photo-1562058555-7b8f8de36d73?fit=crop&w=800&h=400",
+      image: "https://www.livemint.com/lm-img/img/2024/04/03/600x338/4k_monitors_1712149767253_1712149767508.jpg",
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const blogPosts = [
   
         The materials used in its construction are both durable and breathable, ensuring longevity and comfort even during intense gaming marathons. Its armrests are fully adjustable, providing additional support for your arms and shoulders. The chair also features a smooth swivel base and sturdy caster wheels, allowing for effortless movement across different surfaces. Whether you're gaming, working, or just relaxing, the ergonomic features of this chair adapt to your body's needs. Experience a revolution in comfort with a chair that understands the demands of modern gamers.
       `,
-      image: "https://images.unsplash.com/photo-1604534348182-0d7e4f546842?fit=crop&w=800&h=400",
+      image: "https://lirp.cdn-website.com/222dffe2/dms3rep/multi/opt/ergohuman-ultra-gaming-d5ef3d15-1920w.jpg",
     },
     {
       id: 4,
@@ -37,7 +37,7 @@ const blogPosts = [
   
         Installation is simple, with user-friendly setup procedures that allow anyone to get started quickly. The camera supports high-definition video capture, ensuring that every detail is clear and precise. Night vision capability provides around-the-clock security, ensuring your home is protected even in low-light conditions. Privacy settings can be customized, allowing you to control when and where the camera records. By combining cutting-edge technology with user-centric design, this security camera offers a robust solution to modern home safety concerns.
       `,
-      image: "https://images.unsplash.com/photo-1598626796834-d73e3da5f080?fit=crop&w=800&h=400",
+      image: "https://images.indianexpress.com/2024/07/security-camera-buying-guide-2024.jpg?w=640",
     },
     {
       id: 5,
@@ -47,7 +47,7 @@ const blogPosts = [
   
         Battery life has been optimized to last all day, allowing you to enjoy music without frequent recharging. The speaker's water-resistant design ensures that it can handle splashes and light rain, making it perfect for pool parties or beach outings. It also features intuitive controls, so you can easily adjust volume, skip tracks, and take calls with a simple touch. By marrying high-quality sound with a rugged, portable design, this Bluetooth speaker meets the needs of today’s active lifestyle. Let the music move with you, wherever you go.
       `,
-      image: "https://images.unsplash.com/photo-1517684211767-8b83215f1d5c?fit=crop&w=800&h=400",
+      image: "https://cdn.shopify.com/s/files/1/0057/8938/4802/files/S180a_480x480.jpg?v=1608295591",
     },
     {
       id: 6,
@@ -57,7 +57,7 @@ const blogPosts = [
   
         This phone is part of a broader movement towards sustainable tech that prioritizes environmental responsibility. With fast charging capabilities and robust security features, it meets the demands of modern life while minimizing environmental impact. The operating system is optimized for efficiency, ensuring smooth performance and extended battery life. It’s designed to last, with a focus on durability and repairability, reducing electronic waste. Embrace the future of tech with a smartphone that makes a positive impact on the planet.
       `,
-      image: "https://images.unsplash.com/photo-1592957478785-095aeb7aaeb7?fit=crop&w=800&h=400",
+      image: "https://i.guim.co.uk/img/media/ec3c5940512deaf29975a90fab1a01c8bde8187f/0_140_2763_1659/master/2763.jpg?width=620&dpr=2&s=none",
     },
     {
       id: 7,
@@ -67,7 +67,7 @@ const blogPosts = [
   
         Built with precision, this smartwatch offers a durable and water-resistant design, making it suitable for any environment. Its intuitive interface makes it easy to navigate through various features, from setting reminders to tracking your fitness goals. The smartwatch's battery is designed to last through multiple days of use, ensuring you're always connected. By integrating advanced sensors and algorithms, it provides accurate health metrics and insights, empowering you to make informed lifestyle choices. Discover a new era of connectivity and convenience with a smartwatch that keeps you in control.
       `,
-      image: "https://images.unsplash.com/photo-1610714377414-06938a27c9ae?fit=crop&w=800&h=400",
+      image: "https://www.hindustantimes.com/ht-img/img/2023/12/15/550x309/watch__1702622491477_1702622491635.jpg",
     },
     {
       id: 8,
@@ -77,7 +77,7 @@ const blogPosts = [
   
         The laptop's design prioritizes user comfort, featuring a backlit keyboard and responsive trackpad for seamless navigation. It runs on the latest operating system, offering enhanced security and productivity features. Advanced cooling technology keeps the system running smoothly even during intensive tasks, while the quick boot times ensure you’re always ready to go. With its combination of cutting-edge features and sleek design, the Next-Gen Laptop is a versatile tool for today’s dynamic lifestyle. Experience a new level of computing with a laptop that adapts to your every need.
       `,
-      image: "https://images.unsplash.com/photo-1523475496353-f0f7f5a1031b?fit=crop&w=800&h=400",
+      image: "https://regmedia.co.uk/2017/07/26/mssurface_mkt_02_pewter_rgb_small.jpg",
     },
     {
       id: 9,
@@ -87,7 +87,7 @@ const blogPosts = [
   
         Each earbud is equipped with noise isolation technology, allowing you to focus on your music without distractions. The earbuds connect seamlessly to your devices via Bluetooth, ensuring a stable and lag-free audio experience. Their water-resistant design makes them suitable for any environment, whether you're at the gym or outdoors. By combining innovative design with top-notch audio quality, these earbuds redefine what it means to experience music on the go. Dive into a world of sound and convenience with earbuds that elevate your listening experience.
       `,
-      image: "https://images.unsplash.com/photo-1606183357596-3b3499b60b0c?fit=crop&w=800&h=400",
+      image: "https://miro.medium.com/v2/resize:fit:720/format:webp/0*H1GZWJAfWiVXkovH.jpg",
     },
     {
       id: 10,
@@ -97,7 +97,7 @@ const blogPosts = [
   
         Installation is straightforward, with step-by-step instructions that guide you through the process. The thermostat features predictive algorithms that learn from your habits, creating a personalized heating and cooling schedule. It also provides energy usage reports, helping you understand and manage your consumption more effectively. With compatibility with voice assistants like Alexa and Google Assistant, controlling your home’s temperature has never been more convenient. Embrace the future of home automation with a smart thermostat that brings intelligence and efficiency to your fingertips.
       `,
-      image: "https://images.unsplash.com/photo-1542853831-d6f26a2060c8?fit=crop&w=800&h=400",
+      image: "https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c21hcnQlMjB0aGVybW9zdGF0fGVufDB8fDB8fHww",
     },
   ];
   
