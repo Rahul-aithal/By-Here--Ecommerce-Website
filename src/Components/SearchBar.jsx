@@ -21,8 +21,8 @@ import { setItem } from '../Store/ItemSlice';
 
 function SearchBar({ ref }) {
   const dispatch = useDispatch();
-  
-  const navigateTo=useNavigate();
+
+  const navigateTo = useNavigate();
   const [search, setSearch] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data, loading, error } = useFetch(`https://dummyjson.com/products/search?q=${search}`)
@@ -31,7 +31,7 @@ function SearchBar({ ref }) {
     <>
 
       <button
-        className="flex items-center justify-start bg-gray-100 px-4 py-2 rounded-full md:w-64 w-32 border border-gray-300 hover:bg-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out"
+        className="flex items-center justify-start bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-full md:w-64 w-32 border border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out"
         onClick={onOpen}
       >
         <FaSearch className="md:mr-2" />
@@ -47,15 +47,15 @@ function SearchBar({ ref }) {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-             <input type="text"
-            placeholder='Search'
-            className='flex items-center justify-start bg-gray-100 px-4 py-2 rounded-full w-full border border-gray-300 hover:bg-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out'
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value)
-              
-            }}
-          /></ModalHeader>
+            <input type="text"
+              placeholder='Search'
+              className='flex items-center justify-start bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-full w-full border border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out'
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value)
+
+              }}
+            /></ModalHeader>
           <ModalBody>
             {
               loading && <Stack spacing={4}>
@@ -68,15 +68,15 @@ function SearchBar({ ref }) {
             {
               error && <p>Something went wrong</p>
             }
-            {data.products && data.products.map((res,idx) => {
+            {data.products && data.products.map((res, idx) => {
               return (
                 <div key={res.id}
-                  className="w-full h-8 px-3 text-black font-medium cursor-pointer rounded-xl bg-white  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out border-red-300"
-onClick={()=>{
-  navigateTo('/itemPage');
-  dispatch(setItem({data:data.products[idx]}));
-  onClose()
-}}
+                  className="w-full h-8 px-3 bg-white dark:bg-gray-800   text-black dark:text-white font-medium cursor-pointer rounded-xl  hover:bg-gray-200 dark:hover:bg-black focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out border-red-300 my-2"
+                  onClick={() => {
+                    navigateTo('/item-page');
+                    dispatch(setItem({ data: data.products[idx] }));
+                    onClose()
+                  }}
                 >
                   {res.title}
                 </div>)

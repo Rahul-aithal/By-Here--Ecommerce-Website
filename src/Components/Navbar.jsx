@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import { NavLink, Link } from 'react-router-dom';
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
+import {  Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import useFetch from '../Hooks/useFetchData';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,53 +13,73 @@ function Navbar() {
   const dispatch = useDispatch();
   const categoryToogle = useSelector((state) => state.category.categoryToogle);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error fetching categories</p>;
+  if (loading) return <p className="text-center">Loading...</p>;
+  if (error) return <p className="text-center text-red-500">Error fetching categories</p>;
 
   return (
     <nav className="bg-transparent grid grid-cols-3 place-items-center h-full w-full md:min-h-14 md:max-h-16 max-h-12 sticky top-0 z-20 px-3 backdrop-blur-xl">
       <div className="flex gap-4 w-full col-start-1 items-center justify-start">
-        <Button colorScheme="blackAlpha" onClick={onOpen} aria-label="Open menu">
+        <button 
+          className="p-2 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
+          onClick={onOpen}
+          aria-label="Open menu"
+        >
           <GiHamburgerMenu />
-        </Button>
+        </button>
         <Link to="/" className="font-bold md:text-xl text-xs">
-          Buy<span className="text-red-500">Here</span>
+         <span className='dark:text-white'>Buy</span> <span className="text-red-500">Here</span>
         </Link>
       </div>
       <SearchBar />
       <ul className="flex md:gap-4 gap-2 text-xs md:text-xl">
-        <NavLink to="/cart" className={({ isActive }) => `${isActive ? "text-black" : "text-gray-400"} cursor-pointer hover:text-black font-bold`}>
+        <NavLink 
+          to="/cart" 
+          className={({ isActive }) => `${isActive ? "text-black dark:text-white" : "text-gray-400"} cursor-pointer hover:text-black dark:hover:text-white font-bold`}
+        >
           Cart
         </NavLink>
-        <NavLink to="/all-items-page" className={({ isActive }) => `${isActive ? "text-black" : "text-gray-400"} cursor-pointer hover:text-black font-bold`}>
+        <NavLink 
+          to="/all-items-page" 
+          className={({ isActive }) => `${isActive ? "text-black dark:text-white" : "text-gray-400"} cursor-pointer hover:text-black dark:hover:text-white font-bold`}
+        >
           Store
         </NavLink>
-        <NavLink to="/support" className={({ isActive }) => `${isActive ? "text-black" : "text-gray-400"} cursor-pointer hover:text-black font-bold`}>
+        <NavLink 
+          to="/support" 
+          className={({ isActive }) => `${isActive ? "text-black dark:text-white" : "text-gray-400"} cursor-pointer hover:text-black dark:hover:text-white font-bold`}
+        >
           Support
         </NavLink>
       </ul>
-      <Drawer colorScheme="gray" placement="left" onClose={onClose} isOpen={isOpen || categoryToogle}>
+      <Drawer 
+        placement="left" 
+        onClose={onClose} 
+        isOpen={isOpen || categoryToogle}
+      >
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton onClick={()=>{dispatch(setCategoryToogle({ categoryToggle: false }));}}/>
+        <DrawerContent className="bg-white dark:bg-black text-black dark:text-white">
+          <DrawerCloseButton 
+            className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
+            onClick={() => dispatch(setCategoryToogle({ categoryToggle: false }))}
+          />
           <DrawerHeader borderBottomWidth="1px">Categories</DrawerHeader>
           <DrawerBody>
             {data.length > 0 ? (
-              data.map((category) => (
-                <Button
-                  key={category.name}
-                  className="p-2 mb-1 w-full md:text-xl bg-white border-2 rounded hover:bg-gray-100 cursor-pointer"
+              data.map((category, idx) => (
+                <button
+                  key={idx}
+                  className="block w-full md:text-xl border-2 rounded-xl p-2 mb-2 cursor-pointer bg-white dark:bg-gray-700  text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                   onClick={() => {
-                    dispatch(setCategory({category}));
+                    dispatch(setCategory({ category }));
                     dispatch(setCategoryToogle({ categoryToggle: false }));
                     onClose();
                   }}
                 >
                   {category.name}
-                </Button>
+                </button>
               ))
             ) : (
-              <p>No categories available</p>
+              <p className="text-center">No categories available</p>
             )}
           </DrawerBody>
         </DrawerContent>

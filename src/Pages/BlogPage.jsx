@@ -21,10 +21,10 @@ function BlogDetail() {
         objectFit="contain"
         mb="4"
       />
-      <Heading as="h1" size="xl" mb="4">
+      <Heading as="h1" size="xl" mb="4" className='dark:text-white' >
         {post.title}
       </Heading>
-      <Text fontSize="lg" mb="4">
+      <Text fontSize="lg" mb="4" className='dark:text-white'>
         {post.content}
       </Text>
       <Button colorScheme="blue" onClick={() => window.history.back()}>

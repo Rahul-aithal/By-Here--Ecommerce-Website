@@ -24,13 +24,26 @@ const Support = () => {
         <Heading as="h1" size="xl" mb={4}>
           Support Center
         </Heading>
-        <Text fontSize="lg" color="gray.600">
+        <Text
+          sx={{
+            fontSize: "lg" ,
+         color: "gray.600",
+         _dark:{
+          color:"gray.200",
+         }
+          }} >
           We're here to help! Please fill out the form below for any inquiries or support requests.
         </Text>
       </Box>
 
       <Box
-        bg="white"
+      sx={{
+        
+        bg:"white",
+        _dark:{
+          bg:"black"
+        }
+      }}
         p={6}
         borderRadius="md"
         boxShadow="md"
@@ -38,7 +51,7 @@ const Support = () => {
         mx="auto"
         mb={8}
       >
-        <Stack spacing={4}>
+        <Stack spacing={4} >
           <FormControl id="name" isRequired>
             <FormLabel>Name</FormLabel>
             <Input placeholder="Your Name" />
@@ -60,7 +73,7 @@ const Support = () => {
         </Stack>
       </Box>
 
-      <Box bg="white" p={6} borderRadius="md" boxShadow="md" maxW="container.md" mx="auto">
+      <Box sx={{bg:"white",_dark:{bg:"black",border:"1px",borderColor:'white  '}}}  p={6} borderRadius="md" boxShadow="md" maxW="container.md" mx="auto">
         <Heading as="h2" size="lg" mb={4}>
           Frequently Asked Questions
         </Heading>

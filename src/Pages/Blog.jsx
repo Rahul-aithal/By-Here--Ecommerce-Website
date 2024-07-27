@@ -10,19 +10,20 @@ const ProductBlog = () => {
       spacing={8}
       align="stretch"
       p={4}
-      bg="gray.50"
+      
       rounded="lg"
       shadow="md"
+     className='dark:bg-slate-800'
     >
       {blogPosts.map((post) => (
         <Box
           key={post.id}
           p={6}
-          bg="white"
           rounded="lg"
           shadow="sm"
           transition="transform 0.3s, box-shadow 0.3s"
           _hover={{ transform: 'scale(1.02)', shadow: 'lg' }}
+           className='dark:text-white dark:bg-black'
         >
           <Image
             src={post.image}
@@ -31,10 +32,10 @@ const ProductBlog = () => {
             objectFit="fit"
             mb={4}
           />
-          <Heading size="lg" mb={4} color="blue.600">
+          <Heading size="lg" mb={4} color="blue.600" >
             {post.title}
           </Heading>
-          <Text fontSize="md" color="gray.700">
+          <Text fontSize="md" className='dark:text-gray-200 text-gray-700' >
             {post.content}
           </Text>
           <Divider my={6} />
