@@ -72,7 +72,7 @@ function Home() {
               alt={post.title}
               h="56"
               w="full"
-              objectFit="cover"
+              objectFit="fit"
             />
             <VStack align="start" p="4" spacing="3">
               <Heading as="h2" size="md" isTruncated>

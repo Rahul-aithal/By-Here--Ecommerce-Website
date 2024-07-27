@@ -18,7 +18,7 @@ function BlogDetail() {
         alt={post.title}
         h="400px"
         w="full"
-        objectFit="cover"
+        objectFit="contain"
         mb="4"
       />
       <Heading as="h1" size="xl" mb="4">

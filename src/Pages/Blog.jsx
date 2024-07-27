@@ -28,6 +28,7 @@ const ProductBlog = () => {
             src={post.image}
             alt={post.title}
             borderRadius="md"
+            objectFit="fit"
             mb={4}
           />
           <Heading size="lg" mb={4} color="blue.600">
