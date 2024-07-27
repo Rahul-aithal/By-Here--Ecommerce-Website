@@ -10,7 +10,8 @@ import {
   useDisclosure,
   Button,
   Skeleton,
-  Stack
+  Stack,
+  useBreakpointValue
 } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 import useFetch from '../Hooks/useFetchData';
@@ -26,16 +27,16 @@ function SearchBar({ ref }) {
   const [search, setSearch] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data, loading, error } = useFetch(`https://dummyjson.com/products/search?q=${search}`)
-
+  const isLargeScreen = useBreakpointValue({ base: false, sm: false, md: true });
   return (
     <>
 
       <button
-        className="flex items-center justify-start bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-full md:w-64 w-32 border border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-200 ease-in-out"
+        className="flex items-center justify-start bg-gray-100 dark:bg-gray-800 md:px-4 md:py-2 rounded-full md:w-64 w-auto md:border md:border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-50 md:focus:outline-none md:focus:ring-2   md:focus:ring-blue-400 focus:outline-none  transition-colors duration-200 ease-in-out"
         onClick={onOpen}
       >
         <FaSearch className="md:mr-2" />
-        <span>Search</span>
+      {isLargeScreen&&<span>Search</span>}
       </button>
 
       <Modal

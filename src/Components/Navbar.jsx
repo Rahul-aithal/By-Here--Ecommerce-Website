@@ -1,17 +1,25 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import { NavLink, Link } from 'react-router-dom';
-import {  Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
+import {  Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, useColorMode, useDisclosure } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import useFetch from '../Hooks/useFetchData';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategory, setCategoryToogle } from '../Store/categorySlice';
+import { changeTheme } from '../Store/ThemeSlice';
+import { MdNightlightRound, MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, loading, error } = useFetch('https://dummyjson.com/products/categories');
   const dispatch = useDispatch();
   const categoryToogle = useSelector((state) => state.category.categoryToogle);
+  const { colorMode } = useColorMode();
+
+const setTheme =()=>{
+  dispatch(changeTheme());
+
+}
 
   if (loading) return <p className="text-center">Loading...</p>;
   if (error) return <p className="text-center text-red-500">Error fetching categories</p>;
@@ -27,10 +35,13 @@ function Navbar() {
           <GiHamburgerMenu />
         </button>
         <Link to="/" className="font-bold md:text-xl text-xs">
-         <span className='dark:text-white'>Buy</span> <span className="text-red-500">Here</span>
+         <span className='dark:text-white'>Buy</span><span className="text-red-500">Here</span>
         </Link>
       </div>
       <SearchBar />
+      <div className="flex md:gap-6 justify-between items-center gap-2  ">
+
+     
       <ul className="flex md:gap-4 gap-2 text-xs md:text-xl">
         <NavLink 
           to="/cart" 
@@ -51,6 +62,17 @@ function Navbar() {
           Support
         </NavLink>
       </ul>
+        <button className=' p-2 rounded text-xl text-center md:me-0 me-2' 
+        onClick={setTheme}>
+
+{colorMode&&colorMode==="dark"?
+           <MdOutlineLightMode />:
+           <MdNightlightRound />
+}
+        </button>
+        </div>
+
+      {/* THE CATEGORY SELECTOR */}
       <Drawer 
         placement="left" 
         onClose={onClose} 

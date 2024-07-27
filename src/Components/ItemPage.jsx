@@ -39,10 +39,24 @@ function ItemPage() {
       borderWidth="1px"
       borderRadius="lg"
       shadow="lg"
-      bg="white"
+      sx={
+        {
+          bg: "white",
+          _dark: {
+            bg: "black"
+          }
+
+        }
+      }
     >
       <VStack spacing={4} align="stretch">
-        <Box position="relative" w="full">
+        <Box position="relative" w="full"
+          sx={{
+            bg: "white",
+            _dark: {
+              bg: "black"
+            }
+          }}>
           <Button boxSize="full" onClick={item.images?.length > 0 ? onOpen : undefined} variant="outline">
             <Image
               boxSize="full"
@@ -88,14 +102,19 @@ function ItemPage() {
           {item.title || "Item Title"}
         </Text>
 
-        <Text color="gray.600">
+        <Text sx={{
+          color: "gray.600",
+          _dark: {
+            color: "gray.300"
+          }
+        }}>
           {item.description || "No description available"}
           {more && (
             <>
               ...
               <Text
                 as="span"
-                className="hover:underline cursor-pointer text-blue-500 hover:text-red-500"
+                className="hover:underline cursor-pointer text-blue-500 "
                 onClick={() => {
                   setMore(false);
                   setExtend(true);
@@ -106,7 +125,16 @@ function ItemPage() {
             </>
           )}
           {extend && (
-            <Box mt={4} p={4} borderWidth="1px" borderRadius="md" bg="gray.50" position="relative">
+            <Box mt={4} p={4} borderWidth="1px" borderRadius="md" position="relative"
+              sx={
+                {
+                  bg: "gray.50",
+                  _dark: {
+                    bg: "gray.900"
+                  }
+
+                }}
+            >
               <CloseButton
                 position="absolute"
                 right={2}
@@ -143,6 +171,7 @@ function ItemPage() {
                 Availability Status:
               </Text>
               <Text
+                fontWeight="bold"
                 color={item.availabilityStatus === "Low Stock" ? "orange.500" : "green.500"}
               >
                 {item.availabilityStatus || "N/A"}
@@ -180,7 +209,14 @@ function ItemPage() {
           ${item.price?.toFixed(2) || "0.00"}
         </Text>
 
-        <Text color="gray.600">Discount: {item.discountPercentage || 0}%</Text>
+        <Text sx={
+          {
+            color: "gray.600",
+            _dark: {
+              color: "gray.400"
+            }
+          }
+        }>Discount: {item.discountPercentage || 0}%</Text>
 
         <Text color={item.stock > 0 ? "green.500" : "red.500"} fontWeight="bold">
           {item.stock > 0 ? "In Stock" : "Out of Stock"}
@@ -189,11 +225,26 @@ function ItemPage() {
         <Stack direction="column" spacing={2} mt={4}>
           {item.reviews?.length > 0 ? (
             item.reviews.map((review, index) => (
-              <Box key={index} p={4} borderWidth="1px" borderRadius="md" bg="gray.100">
+              <Box key={index} p={4} borderWidth="1px" borderRadius="md"
+                sx={
+                  {
+                    bg: "gray.100",
+                    _dark: {
+                      bg: "gray.700"
+                    }
+                  }
+                }>
                 <Text fontWeight="bold">
                   {review.reviewerName || "Anonymous"} - {review.rating || 0}⭐
                 </Text>
-                <Text color="gray.600">{review.comment || "No comment"}</Text>
+                <Text sx={
+                  {
+                    color: "gray.600",
+                    _dark: {
+                      color: "gray.400"
+                    }
+                  }
+                }>{review.comment || "No comment"}</Text>
               </Box>
             ))
           ) : (

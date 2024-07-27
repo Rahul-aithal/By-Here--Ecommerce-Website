@@ -3,16 +3,17 @@ import { Outlet } from 'react-router-dom'
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
 import { useSelector } from 'react-redux'
+import { useColorMode } from '@chakra-ui/react'
 
 function App() {
   const isDark = useSelector((state)=>(state.theme.dark));
-  
+  const { setColorMode } = useColorMode();
 
 useEffect(() => {
 const html=document.querySelector("html");
 html.classList.remove("dark","light");
 html.classList.add(isDark?"dark":"light");
-
+setColorMode(isDark?"dark":"light")
 }, [isDark])
   
   return (
