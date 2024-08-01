@@ -71,7 +71,7 @@ function Cart() {
       );
     }
   }, [purchasedProducts]);
-  
+
 
   // Handle adding item to cart
   useEffect(() => {
@@ -104,11 +104,11 @@ function Cart() {
     );
   };
   const handleBuyNow = (purchasedCartItem) => {
-    
-      setPurchasedProducts([...purchasedProducts,purchasedCartItem])
-      setCartProducts((prevCartItems) =>
-        prevCartItems.filter((cartItem) => cartItem.id !== purchasedCartItem.id)
-      );
+
+    setPurchasedProducts([...purchasedProducts, purchasedCartItem])
+    setCartProducts((prevCartItems) =>
+      prevCartItems.filter((cartItem) => cartItem.id !== purchasedCartItem.id)
+    );
   };
 
   const handleQuantityChange = (id, newQuantity) => {
@@ -129,7 +129,13 @@ function Cart() {
         spacing={6}
         align="stretch"
         p={4}
-        bg="gray.50"
+        sx={{
+
+          bg: "gray.50",
+          _dark: {
+            bg: "gray.700"
+          }
+        }}
         rounded="lg"
         shadow="md"
       >
@@ -137,7 +143,16 @@ function Cart() {
           direction={{ base: 'column', sm: 'row' }}
           overflow="hidden"
           variant="outline"
-          bg="white"
+          sx={
+
+            {
+              bg: "white",
+              _dark: {
+                bg: "gray.900"
+              }
+            }
+
+          }
           shadow="sm"
           rounded="lg"
           transition="transform 0.3s, box-shadow 0.3s"
@@ -161,7 +176,11 @@ function Cart() {
                 {cartItem.title}
               </Heading>
 
-              <Text py={2} fontSize="sm" color="gray.700">
+              <Text py={2} fontSize="sm" sx={{
+                color: "gray.700", _dark: {
+                  color: "gray.200"
+                }
+              }}>
                 {cartItem.description || 'Description not available'}
               </Text>
 
@@ -175,8 +194,8 @@ function Cart() {
                     cartItem.rating > 3.8
                       ? 'green.500'
                       : cartItem.rating > 2.5
-                      ? 'yellow.500'
-                      : 'red.500'
+                        ? 'yellow.500'
+                        : 'red.500'
                   }
                 >
                   Rating: {cartItem.rating?.toFixed(1) || 'No rating'}
@@ -212,7 +231,7 @@ function Cart() {
 
             <CardFooter>
               <Button
-              m={2}
+                m={2}
                 variant="solid"
                 colorScheme="green"
                 size="sm"
@@ -223,7 +242,7 @@ function Cart() {
                 {cartItem.stock > 0 ? 'Buy Now' : 'Out of Stock'}
               </Button>
               <Button
-              m={2}
+                m={2}
                 variant="solid"
                 colorScheme="red"
                 size="sm"
@@ -238,7 +257,12 @@ function Cart() {
       </VStack>
     ))
   ) : (
-    <Text p={4} textAlign="center" color="gray.600">
+    <Text p={4} textAlign="center" sx={{
+      color: "gray.600",
+      _dark: {
+        color: "gray.300"
+      }
+    }}>
       Your cart is empty.
     </Text>
   );
