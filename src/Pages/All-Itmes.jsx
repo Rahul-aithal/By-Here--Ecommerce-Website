@@ -22,7 +22,7 @@ import {
   useBreakpointValue,
   VStack,
 } from '@chakra-ui/react';
-import { setItem } from '../Store/ItemSlice';
+import { setItem } from '../Store/itemSlice';
 
 function AllItems() {
   const location = useLocation();

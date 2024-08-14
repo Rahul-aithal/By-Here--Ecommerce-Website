@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import itemSlice  from './ItemSlice'
+import itemSlice  from './itemSlice'
 import categorySlice from './categorySlice'
 import  themeSlice  from './ThemeSlice'
 
