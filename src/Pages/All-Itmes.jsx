@@ -164,7 +164,7 @@ function AllItems() {
               </CardBody>
 
               <CardFooter>
-                <Button
+              <Button
                   variant="solid"
                   colorScheme="blue"
                   size="sm"
@@ -176,7 +176,7 @@ function AllItems() {
                   }}
                 >
                   {item.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
-                </Button>
+              </Button>
               </CardFooter>
             </Stack>
           </Card>

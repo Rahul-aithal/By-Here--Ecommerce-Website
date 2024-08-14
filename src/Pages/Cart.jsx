@@ -28,7 +28,6 @@ function Cart() {
   const navigate = useNavigate();
   const [hasAddedToCart, setHasAddedToCart] = useState(false)
 
-  // Initialize cart products from session storage
   useEffect(() => {
     try {
       setItem(location.state?.item || {});
@@ -41,7 +40,7 @@ function Cart() {
       console.error("Failed to parse cartProducts from sessionStorage:", error);
     }
   }, []);
-
+  
   useEffect(() => {
     try {
       const storedPurchased = sessionStorage.getItem("purchasedProducts");
@@ -52,48 +51,24 @@ function Cart() {
       console.error("Failed to parse cartProducts from sessionStorage:", error);
     }
   }, []);
-
-  // Update session storage whenever cartProducts changes
+  
   useEffect(() => {
-    if (cartProducts.length > 0) {
-      sessionStorage.setItem(
-        "cartProducts",
-        JSON.stringify(
-          cartProducts.map((cartItem) => ({
-            ...cartItem, // Copy all properties of the cart item
-          }))
-        )
-      );
-    }
-
-    if (purchasedProducts.length > 0) {
-      sessionStorage.setItem(
-        "purchasedProducts",
-        JSON.stringify(
-          purchasedProducts.map((purchasedItem) => ({
-            ...purchasedItem, // Copy all properties of the purchased item
-          }))
-        )
-      );
-    }
-    if (purchasedProducts.length === 0) {
-      sessionStorage.removeItem("purchasedProducts");
-    }
-  }, [cartProducts, purchasedProducts]);
-
+    setHasAddedToCart(false); // Reset flag whenever item or add changes
+  }, [item, add]);
+  
   useEffect(() => {
-    if (add && item.id&&!hasAddedToCart) {
+    if (add && item?.id && !hasAddedToCart) {
       setCartProducts((prevCartProducts) => {
         const existingProductIndex = prevCartProducts.findIndex(
           (prod) => prod.id === item.id
         );
-
+  
         if (existingProductIndex !== -1) {
           const updatedCartProducts = [...prevCartProducts];
           updatedCartProducts[existingProductIndex] = {
             ...updatedCartProducts[existingProductIndex],
             quantity:
-              updatedCartProducts[existingProductIndex].quantity >
+              updatedCartProducts[existingProductIndex].quantity >=
               updatedCartProducts[existingProductIndex].stock
                 ? updatedCartProducts[existingProductIndex].stock
                 : updatedCartProducts[existingProductIndex].quantity + 1,
@@ -106,9 +81,30 @@ function Cart() {
           ];
         }
       });
+      setHasAddedToCart(true); // Set the flag to prevent multiple additions
     }
-    setHasAddedToCart(true)
-  }, [add, item,hasAddedToCart]);
+  }, [add, item, hasAddedToCart]);
+  
+  useEffect(() => {
+    if (cartProducts.length > 0) {
+      sessionStorage.setItem(
+        "cartProducts",
+        JSON.stringify(cartProducts)
+      );
+    }
+  }, [cartProducts]);
+  
+  useEffect(() => {
+    if (purchasedProducts.length > 0) {
+      sessionStorage.setItem(
+        "purchasedProducts",
+        JSON.stringify(purchasedProducts)
+      );
+    } else {
+      sessionStorage.removeItem("purchasedProducts");
+    }
+  }, [purchasedProducts]);
+  
 
   const handleRemoveFromCart = (id) => {
     setCartProducts((prevCartItems) => {
