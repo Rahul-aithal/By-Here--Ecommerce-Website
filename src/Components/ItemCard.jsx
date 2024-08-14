@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
-import {setItem} from '../Store/ItemSlice.js'
+import {setItem} from '../Store/itemSlice.js'
 import useFetch from '../Hooks/useFetchData'
 
 function ItemCard({url}) {

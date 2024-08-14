@@ -17,7 +17,7 @@ import { FaSearch } from 'react-icons/fa';
 import useFetch from '../Hooks/useFetchData';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setItem } from '../Store/ItemSlice';
+import { setItem } from '../Store/itemSlice';
 
 
 function SearchBar({ ref }) {
