@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
-import store from './Store/Store';
+import store from './Store/Store.js';
 import './index.css';
 import App from './App'; 
 import { About, Blog, BlogDetail, Cart, Home, ItemPage, Support, AllItmes } from './Pages/index.js';
